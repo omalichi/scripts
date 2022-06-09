@@ -1,0 +1,1 @@
+For ($i=300; $i -le 500; $i++) { Test-NetConnection -ComputerName "10.110.111.45" -port $i}
