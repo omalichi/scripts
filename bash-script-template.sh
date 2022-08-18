@@ -17,8 +17,14 @@ case $1 in
 esac
 
 
-DATE='date +-%Y-%m-%d_%H-%M-%S'
+# for files - format example: "-2022-08-18_10-21-49"
+date +-%Y-%m-%d_%H-%M-%S
 
+# general - format example: "10:20:09 18/08/2022"
+date "+%H:%M:%S %d/%m/%Y"
+
+# for logs - format example: "18/08/2022 10:23:44"
+date "+%d/%m/%Y %H:%M:%S"
 
 # Using parameters gotten from the user. "-o" means "or", -a means "and"
 if [ "$1" == "" -o "$2" == "" ]; then
