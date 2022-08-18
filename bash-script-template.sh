@@ -17,6 +17,7 @@ case $1 in
 esac
 
 
+DATE='date +-%Y-%m-%d_%H-%M-%S'
 
 
 # Using parameters gotten from the user. "-o" means "or", -a means "and"
