@@ -1,5 +1,21 @@
 #!/bin/bash
 
+function printToLogAndConsole()
+{
+	# params:
+	# $1 - data to print
+	# $2 - log file to print to
+	
+	if [ -n "$1" ]; then
+		CURRNET_DATE=$(echo $DATE_FORMAT | bash)
+		
+		echo "$CURRNET_DATE $1" | tee -a $2
+	fi
+}
+
+printToLogAndConsole "ERROR! This script requires root privileges!" $LOG_FILE_SPEC
+
+
 if [ "$1" == "" ]; then
 	echo "ERROR! Wrong Input."
 	echo "Usage: $0 <tar.gz_archive_file_to_check>"
