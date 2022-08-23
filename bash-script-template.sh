@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# function example
+
 function printToLogAndConsole()
 {
 	# params:
@@ -14,6 +16,10 @@ function printToLogAndConsole()
 }
 
 printToLogAndConsole "ERROR! This script requires root privileges!" $LOG_FILE_SPEC
+
+
+# get data from the user
+read -p "name:" name;echo "hello $name"
 
 
 if [ "$1" == "" ]; then
