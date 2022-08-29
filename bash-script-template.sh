@@ -22,6 +22,13 @@ printToLogAndConsole "ERROR! This script requires root privileges!" $LOG_FILE_SP
 read -p "name:" name;echo "hello $name"
 
 
+re='^[0-9]+$'
+
+if ! [[ $yournumber =~ $re ]] ; then
+	echo "NOT a number!"
+fi
+
+
 if [ "$1" == "" ]; then
 	echo "ERROR! Wrong Input."
 	echo "Usage: $0 <tar.gz_archive_file_to_check>"
