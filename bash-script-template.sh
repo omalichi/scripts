@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# function example
+# function examples
 
 function printToLogAndConsole()
 {
@@ -16,6 +16,15 @@ function printToLogAndConsole()
 }
 
 printToLogAndConsole "ERROR! This script requires root privileges!" $LOG_FILE_SPEC
+
+
+function returnSomethingWithParam()
+{
+	echo "something with param $1"
+}
+
+RESULT=$(returnSomething "myParam")
+
 
 
 # get data from the user
