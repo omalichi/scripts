@@ -31,6 +31,8 @@ RESULT=$(returnSomething "myParam")
 read -p "name:" name;echo "hello $name"
 
 
+# check if number using regex
+
 re='^[0-9]+$'
 
 if ! [[ $yournumber =~ $re ]] ; then
@@ -38,12 +40,18 @@ if ! [[ $yournumber =~ $re ]] ; then
 fi
 
 
-if [ "$1" == "" ]; then
+# work with arguments
+# use -o for "or" and -a for "and"
+
+if [ "$1" == "" -o "$2" == "" ]; then
 	echo "ERROR! Wrong Input."
-	echo "Usage: $0 <tar.gz_archive_file_to_check>"
+	echo "Usage: $0 <tar.gz_archive_file_to_check> <extra-flag>"
 else
 	
 fi
+
+
+# select case
 
 case $1 in
 
@@ -55,6 +63,8 @@ case $1 in
 esac
 
 
+# dates
+
 # for files - format example: "-2022-08-18_10-21-49"
 date +-%Y-%m-%d_%H-%M-%S
 
@@ -64,11 +74,30 @@ date "+%H:%M:%S %d/%m/%Y"
 # for logs - format example: "18/08/2022 10:23:44"
 date "+%d/%m/%Y %H:%M:%S"
 
-# Using parameters gotten from the user. "-o" means "or", -a means "and"
-if [ "$1" == "" -o "$2" == "" ]; then
-	echo ERROR: Wrong Input. Usage: $0 \<dns_of_new_site_without_e\>
-else
+
+# ignore errors
+cmd 2>/dev/null
+
+
+# working with grep
+
+# grep -q does not return any found data
+# check error codes with it:
+# 0 = match found
+# 1 = no match found
+# 2 = file not found (file to work on)
+# be sure to adjust your logic when using grep - sometimes "found" is good, sometimes it is not ...
+# e.g.
+grep -q "search for that" in_this_file 2>/dev/null
+
+if [ "$?" -eq 1 ]; then
+	echo "no match!"
 fi
+
+if [ "$?" -eq 2 ]; then
+	echo "file not found!"
+fi
+
 
 # Getting a sub string from a string
 
@@ -144,7 +173,9 @@ done
 # "-d" = checks if a dir exists
 # "-h" = check if a symbolic link exists
 # "-s" = checks if a file exists and not empty
-# "-z" = checks if a STRING is not empty
+# "-z" = checks if a STRING is empty
+# "-n" = checks if a STRING is NOT empty
+# "$?" = reffers to the last error code [make sure you use it RIGHT AFTER the cmd to test]
 # The SPACES are a MUST since the signs [ and ] are files!
 
 if ! [ -s /etc/init.d/httpd ]; then
