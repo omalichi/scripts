@@ -98,6 +98,12 @@ if [ "$?" -eq 2 ]; then
 	echo "file not found!"
 fi
 
+# ref a variable via string using the special pattern '${!ref}':
+
+var1="this is the real value"
+ref="var1"
+echo "${!ref}" # outputs 'this is the real value'
+
 
 # Getting a sub string from a string
 
